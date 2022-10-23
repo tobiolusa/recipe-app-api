@@ -5,7 +5,17 @@ from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
     PermissionsMixin
-)
+) 
+
+class UserManager(BaseUserManager):
+    """Manager for user"""
+    def create_user(self, email, password=None, **extra_field):
+        user =self.model(email=email, **extra_field)
+        user.set_password(password)
+        user.save(using=self._db)
+        
+        return user
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     """User in the system"""
@@ -15,4 +25,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     
     USERNAME_FIELD ='email'
-    
+   
+x = 4
+if x > 3:
+     pass
+ 
+ 
